@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>766</width>
-    <height>563</height>
+    <width>909</width>
+    <height>709</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -139,7 +139,13 @@
                 </widget>
                </item>
                <item>
-                <widget class="QWidget" name="widget_2" native="true"/>
+                <widget class="QWidget" name="bibleBookContainer" native="true">
+                 <layout class="QHBoxLayout" name="horizontalLayout_6">
+                  <item>
+                   <layout class="QHBoxLayout" name="bibleBookLayout"/>
+                  </item>
+                 </layout>
+                </widget>
                </item>
                <item>
                 <widget class="QPushButton" name="btnBooks">
