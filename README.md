@@ -11,9 +11,14 @@ This is mainly in development but already somewhat useable.
 
 Goals:
 
-- [ ] Custom dowloadable bible databases
+- [x] Custom dowloadable bible databases
 - [ ] Song downloads
 - [ ] Create custom songs
 - [ ] Screen managment
 
 As this is a project for my needs it will contain only the minimum I need and will not implement everything from the Projector app.
+
+For this is mainly for linux, i found that the pip version of pyside6 does not work well with my linux themes ie. buggy colors.
+Solution: download pyside6 using system package manager and create venv using
+python -m venv --system-site-packages venv
+Fixes color problem.
