@@ -74,6 +74,8 @@ def init(window: QWidget,second_window: ShowScreen):
     chapter_edit: QLineEdit = window.findChild(QLineEdit, "chapterEdit") # type: ignore
     verse_edit: QLineEdit = window.findChild(QLineEdit, "verseEdit") # type: ignore
 
+    text_info: QLabel = window.findChild(QLabel, "displayInfo") # type: ignore
+
     # QPushButtons
     text_up: QPushButton = window.findChild(QPushButton, "textUp") # type: ignore
     text_down: QPushButton = window.findChild(QPushButton, "textDown") # type: ignore
@@ -85,7 +87,7 @@ def init(window: QWidget,second_window: ShowScreen):
     action_black: QAction = window.findChild(QAction, "actionBlack") # type: ignore
 
     action_hide.triggered.connect(lambda: hide())
-    action_blank.triggered.connect(lambda: second_window.label.clear())
+    action_blank.triggered.connect(lambda: second_window.main_label.clear())
     action_black.triggered.connect(lambda: second_window.triggerBlack())
 
     def hide():
@@ -164,20 +166,21 @@ def init(window: QWidget,second_window: ShowScreen):
         verse_list_widget.addItems([f"{str(verse[0]) + '.':<5} {verse[1]}" for verse in verses])
         verse_edit.setValidator(QIntValidator(1, len(verses)))
 
-        text_info: QLabel = window.findChild(QLabel, "displayInfo") # type: ignore
         book = [book.short_name for book in books if book.id == current_book][0]
-        text_info.setText(book + "  " + str(current_chapter))
+        text_info.setText(book + " " + str(current_chapter))
 
     def selected_verse_changed(index: int):
         global current_verse
         if index < 0:
             return
         current_verse = index
-        second_window.setText(verse_list_widget.currentItem().text())
+        footer = text_info.text() + ":" + str(current_verse+1)
+        second_window.setText(verse_list_widget.currentItem().text(), footer)
 
     def selected_verse_clicked():
+        footer = text_info.text() + ":" + str(current_verse+1)
         text  = verse_list_widget.currentItem().text()
-        second_window.setText(text)
+        second_window.setText(text, footer)
 
     # LineEdit text changed
     book_edit.textChanged.connect(lambda text: filter_books(text))

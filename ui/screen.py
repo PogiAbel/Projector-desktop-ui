@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout, QApplication
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QFont
 
 
 class ShowScreen(QWidget):
@@ -9,30 +10,38 @@ class ShowScreen(QWidget):
 
         self.isBlack = False
 
-        self.label = QLabel("", self)
-        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.label.setWordWrap(True)
-        self.label.setStyleSheet("color: white; font-size: 28px;")
+        self.main_label = QLabel("", self)
+        self.main_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.main_label.setWordWrap(True)
+        self.main_label.setStyleSheet("color: white; font-size: 80px;")
+
+        self.footer_label = QLabel("", self)
+        self.footer_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.footer_label.setWordWrap(True)
+        self.footer_label.setStyleSheet("color: white; font-size: 40px;")
 
         layout = QVBoxLayout(self)
-        layout.addWidget(self.label)
+        layout.addWidget(self.main_label)
+        layout.addWidget(self.footer_label)
         layout.setContentsMargins(20, 20, 20, 20)
+        layout.setStretch(0,1)
         self.setLayout(layout)
 
-    def setText(self, text: str):
+    def setText(self, main_text: str, footer:str = ""):
         if not self.isBlack:
-            self.label.setText(text)
+            self.main_label.setText(main_text)
+            self.footer_label.setText(footer)
 
     def set_bg_color(self, color: str):
         self.setStyleSheet(f"background-color: {color}")
 
     def set_txt_color(self, color: str):
-        self.label.setStyleSheet(f"color: {color}")
+        self.main_label.setStyleSheet(f"color: {color}")
 
     def triggerBlack(self):
         if not self.isBlack:
             self.isBlack = True
-            self.label.clear()
+            self.main_label.clear()
         else:
             self.isBlack = False
 

@@ -7,7 +7,7 @@ The main problem is that the **Projector** app is windows exclusive(and has terr
 This project could be run in any desktop that supports Python.(maybe there will be builds in the future)
 
 This is mainly in development but already somewhat useable.
-(If you want to use the current version you need to download an sqlite database from [here](https://www.ph4.org/b4_index.php) and put it in the databse folder, also change the database name to the downloaded file in database/bible.py line 47)
+You can donwload predetermined bibles in the app or could drop an .SQLite3 bible from [here](https://www.ph4.org/b4_index.php)
 
 Goals:
 
