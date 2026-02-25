@@ -5,8 +5,9 @@ from PySide6.QtWidgets import QListWidget, QWidget, QLineEdit, QPushButton, QLab
 from PySide6.QtGui import QAction, QIntValidator
 from PySide6.QtCore import QObject, Qt, QEvent
 from ui.screen import ShowScreen
-from database.books_manager import init_books, find_books
+from database.books_manager import init_books
 import re
+from utils.file_manager import find_books
 
 current_book: int = -1
 """Current book id"""
@@ -261,10 +262,11 @@ def init_db(name: str, cursor: sqlite3.Cursor | None) -> sqlite3.Cursor:
     conn: sqlite3.Connection = sqlite3.connect(database=f"file:{db_path}?mode=ro", uri=True)
     return conn.cursor()
 
-def change_bible(name: str):
+def change_bible(index: int):
         global cursor, current_book, current_chapter, current_verse, books
         top_level = QApplication.topLevelWidgets()
         window = [top for top in top_level if top.objectName() == "MainWindow"][0]
+        name = find_books()[index]
 
         book_list_widget: QListWidget  = window.findChild(QListWidget, "bookList") # type: ignore
         chapter_list_widget: QListWidget  = window.findChild(QListWidget, "chapterList") # type: ignore
@@ -275,9 +277,10 @@ def change_bible(name: str):
             
             book_list_widget.clear()
             book_list_widget.addItems([book.get_full_name() for book in books])
-
-            book_row = books.index([b for b in books if b.id == current_book][0])
-            book_list_widget.setCurrentRow(book_row)
+            c_book = [b for b in books if b.id == current_book]
+            if len(c_book) > 0:
+                book_row = books.index(c_book[0])
+                book_list_widget.setCurrentRow(book_row)
 
             chapter_list_widget.setCurrentRow(current_chapter-1)
             verse_list_widget.setCurrentRow(current_verse)
