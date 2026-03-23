@@ -1,5 +1,8 @@
 # Projector-desktop
 
+## Abandoned
+**This project is no longer in development in favor of the linux version of Projector app. As of now, you can find an AppImage build in [here](https://github.com/PogiAbel/Projector/releases/tag/v0.1)**
+
 This is a minimalist alternative for the [Projector](https://github.com/bence21/Projector) application that can be downloaded from [songpraise.com](https://www.songpraise.com/#/desktop-app)
 
 The main problem is that the **Projector** app is windows exclusive(and has terrible compatibility with linux wine).
